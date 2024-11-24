@@ -4,10 +4,13 @@ import com.balieiro.crudClientes.dto.ClientDTO;
 import com.balieiro.crudClientes.entities.Client;
 import com.balieiro.crudClientes.repositories.ClientRepository;
 import com.balieiro.crudClientes.service.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -41,14 +44,21 @@ public class ClientService {
 
     @Transactional
     public ClientDTO update(Long id, ClientDTO clientDTO) {
-        Client client = clientRepository.getReferenceById(id);
-        copyDtoToEntity(clientDTO, client);
-        client = clientRepository.save(client);
-        return new ClientDTO(client);
+        try {
+            Client client = clientRepository.getReferenceById(id);
+            copyDtoToEntity(clientDTO, client);
+            client = clientRepository.save(client);
+            return new ClientDTO(client);
+        }catch (EntityNotFoundException e){
+            throw new ResourceNotFoundException("Recurso não encontrado");
+        }
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.SUPPORTS)
     public void delete(Long id) {
+        if (!clientRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Recurso não encontrado");
+        }
         clientRepository.deleteById(id);
     }
 
