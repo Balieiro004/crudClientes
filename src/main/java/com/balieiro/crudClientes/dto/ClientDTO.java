@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class ClientDTO {
 
     private Long id;
-    @NotEmpty(message = "O campo nome é requerido")
+    @NotBlank(message = "O campo nome é requerido")
     @Size(max = 100, min = 3, message = "Informe um nome com a quantidade de caracteres entre 3 e 100")
     private String name;
 
@@ -28,7 +28,7 @@ public class ClientDTO {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
 
-    @NotBlank(message = "Campo obrigatorio")
+    //@NotBlank(message = "Campo obrigatorio")
     private Integer children;
 
     public ClientDTO(Client client) {
