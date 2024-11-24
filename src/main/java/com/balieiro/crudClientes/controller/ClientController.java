@@ -5,6 +5,7 @@ import com.balieiro.crudClientes.dto.ClientDTO;
 import com.balieiro.crudClientes.entities.Client;
 import com.balieiro.crudClientes.service.ClientService;
 import lombok.AllArgsConstructor;
+import lombok.Delegate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -44,5 +45,11 @@ public class ClientController {
     public ResponseEntity<ClientDTO> update(@PathVariable Long id, @RequestBody ClientDTO clientDTO) {
         clientDTO = clientService.update(id, clientDTO);
         return ResponseEntity.ok().body(clientDTO);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> update(@PathVariable Long id) {
+        clientService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
