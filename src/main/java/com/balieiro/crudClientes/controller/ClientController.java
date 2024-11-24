@@ -1,11 +1,7 @@
 package com.balieiro.crudClientes.controller;
-
-
 import com.balieiro.crudClientes.dto.ClientDTO;
-import com.balieiro.crudClientes.entities.Client;
 import com.balieiro.crudClientes.service.ClientService;
 import lombok.AllArgsConstructor;
-import lombok.Delegate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 
 @AllArgsConstructor
 @RestController

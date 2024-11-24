@@ -3,6 +3,7 @@ package com.balieiro.crudClientes.service;
 import com.balieiro.crudClientes.dto.ClientDTO;
 import com.balieiro.crudClientes.entities.Client;
 import com.balieiro.crudClientes.repositories.ClientRepository;
+import com.balieiro.crudClientes.service.exceptions.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,7 +21,7 @@ public class ClientService {
 
     @Transactional(readOnly = true)
     public ClientDTO findById(Long id) {
-        Client client = clientRepository.findById(id).get();
+        Client client = clientRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrotrado"));
         return new ClientDTO(client);
     }
 
