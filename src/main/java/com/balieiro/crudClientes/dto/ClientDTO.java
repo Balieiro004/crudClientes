@@ -16,7 +16,7 @@ public class ClientDTO {
     private Long id;
     @NotEmpty(message = "O campo nome é requerido")
     @Size(max = 100, min = 3, message = "Informe um nome com a quantidade de caracteres entre 3 e 100")
-    private String nome;
+    private String name;
 
     @Pattern(regexp = "\\d{11}", message = "O CPF deve conter exatamente 11 dígitos numéricos.")
     @Column(unique = true, nullable = false)
@@ -33,7 +33,7 @@ public class ClientDTO {
 
     public ClientDTO(Client client) {
         id = client.getId();
-        nome = client.getNome();
+        name = client.getName();
         cpf = client.getCpf();
         income = client.getIncome();
         birthDate = client.getBirthDate();
