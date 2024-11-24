@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 @AllArgsConstructor
 @Getter
-public class ClientDto {
+public class ClientDTO {
 
     private Long id;
     @NotEmpty(message = "O campo nome é requerido")
@@ -25,13 +25,13 @@ public class ClientDto {
     @Positive(message = "O valor deve ser positivo")
     private Double income;
 
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
 
     @NotBlank(message = "Campo obrigatorio")
     private Integer children;
 
-    public ClientDto(Client client) {
+    public ClientDTO(Client client) {
         id = client.getId();
         nome = client.getNome();
         cpf = client.getCpf();
